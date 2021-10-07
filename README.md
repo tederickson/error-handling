@@ -32,10 +32,9 @@ com/lpl/rest/common/controller/CityControllerTest.java uses MockMvc to test the 
 `curl -v --location --request GET 'localhost:8080/cities'`
 ```json
 {
-    "description": "No data found",
-    "field": null,
-    "value": null,
-    "error_code": 15
+  "status": 404,
+  "code": 15,
+  "statusMessage": "No data found"
 }
 ```
 
@@ -43,10 +42,9 @@ com/lpl/rest/common/controller/CityControllerTest.java uses MockMvc to test the 
 `curl -v --location --request GET 'localhost:8080/cities/23'`
 ```json
 {
-    "description": "City with Id 23 not found",
-    "field": null,
-    "value": null,
-    "error_code": 111
+  "status": 404,
+  "code": 111,
+  "statusMessage": "City with Id 23 not found"
 }
 ```
 
@@ -66,10 +64,9 @@ The ControllerAdvisor was not called.  The message comes from Spring.
 `curl -v --location --request GET 'localhost:8080/bad'`
 ```json
 {
-    "description": "demo handling Java exceptions",
-    "field": null,
-    "value": null,
-    "error_code": null
+  "status": 500,
+  "code": 500,
+  "statusMessage": "demo handling Java exceptions"
 }
 ```
 Log shows
@@ -86,7 +83,7 @@ java.lang.NullPointerException: demo handling Java exceptions
 ```
 
 ### Create City missing name
-```
+```bash
 curl -v --location --request POST 'localhost:8080/cities' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -95,14 +92,15 @@ curl -v --location --request POST 'localhost:8080/cities' \
 ```
 ```json
 {
-    "description": "Null parameter",
-    "field": "name",
-    "value": null,
-    "error_code": 11234
+  "status": 400,
+  "code": 11234,
+  "statusMessage": "Null parameter",
+  "field": "name",
+  "value": null
 }
 ```
 ### Create City missing population
-```
+```bash
 curl -v --location --request POST 'localhost:8080/cities' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -111,15 +109,16 @@ curl -v --location --request POST 'localhost:8080/cities' \
 ```
 ```json
 {
-    "description": "Population can not be less than 1",
-    "field": "population",
-    "value": "0",
-    "error_code": 11234
+  "status": 400,
+  "code": 11234,
+  "statusMessage": "Population can not be less than 1",
+  "field": "population",
+  "value": "0"
 }
 ```
 
 ### Create City with ID
-```json
+```bash
 curl -v --location --request POST 'localhost:8080/cities' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -130,14 +129,15 @@ curl -v --location --request POST 'localhost:8080/cities' \
 ```
 ```json
 {
-    "description": "ID not part of save, use update instead",
-    "field": "id",
-    "value": "12",
-    "error_code": 11234
+  "status": 400,
+  "code": 11234,
+  "statusMessage": "ID not part of save, use update instead",
+  "field": "id",
+  "value": "12"
 }
 ```
 ### Update City missing ID
-```
+```bash
 curl -v --location --request PUT 'localhost:8080/cities' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -147,9 +147,36 @@ curl -v --location --request PUT 'localhost:8080/cities' \
 ```
 ```json
 {
-    "description": "Null parameter",
+    "status": 400,
+    "code": 11234,
+    "statusMessage": "Null parameter",
     "field": "id",
-    "value": null,
-    "error_code": 11234
+    "value": null
 }
 ```
+### Create a City
+```bash
+curl --location --request POST 'localhost:8080/cities' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "New City",
+    "population": 15923
+}'
+```
+```json
+{
+    "id": 1,
+    "name": "New City",
+    "population": 15923
+}
+```
+### Get All Cities
+`curl -v --location --request GET 'localhost:8080/cities'`
+```json
+[
+    {
+        "id": 1,
+        "name": "New City",
+        "population": 15923
+    }
+]```
