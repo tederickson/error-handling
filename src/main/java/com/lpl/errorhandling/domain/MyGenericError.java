@@ -8,10 +8,8 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class LplBadParameterError {
+public class MyGenericError {
     private Integer status;         // HTTP status code
     private Integer code;           // Unique program code
     private String statusMessage;   // Human friendly description
-    private String field;           // Invalid field name
-    private String value;           // Invalid value
 }
