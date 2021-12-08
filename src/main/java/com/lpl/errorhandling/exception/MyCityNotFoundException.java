@@ -1,8 +1,8 @@
 package com.lpl.errorhandling.exception;
 
-public class LplCityNotFoundException extends LplAbstractException {
+public class MyCityNotFoundException extends MyAbstractException {
 
-    public LplCityNotFoundException(Long id) {
+    public MyCityNotFoundException(Long id) {
         super(111, String.format("City with Id %d not found", id));
     }
 }

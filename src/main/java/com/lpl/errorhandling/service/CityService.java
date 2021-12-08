@@ -1,9 +1,6 @@
 package com.lpl.errorhandling.service;
 
 import com.lpl.errorhandling.domain.City;
-import com.lpl.errorhandling.exception.LplCityNotFoundException;
-import com.lpl.errorhandling.exception.LplInvalidParameterException;
-import com.lpl.errorhandling.exception.LplNoDataFoundException;
 import com.lpl.errorhandling.model.CityEntity;
 import com.lpl.errorhandling.repository.CityRepository;
 import com.lpl.errorhandling.transform.CityTransform;
@@ -26,14 +23,14 @@ public class CityService implements ICityService {
         if (cityTable.isPresent())
             return CityTransform.createCity(cityTable.get());
 
-        throw new LplCityNotFoundException(id);
+        throw new com.lpl.errorhandling.exception.MyCityNotFoundException(id);
     }
 
     @Override
     public City save(City city) {
         // Validate city fields
         if (city.getId() != null) {
-            throw new LplInvalidParameterException("id", city.getId()
+            throw new com.lpl.errorhandling.exception.MyInvalidParameterException("id", city.getId()
                     .toString(),
                     "ID not part of save, use update instead");
         }
@@ -49,7 +46,7 @@ public class CityService implements ICityService {
     public void update(City city) {
         // Validate city fields
         if (city.getId() == null) {
-            throw new LplInvalidParameterException("id");
+            throw new com.lpl.errorhandling.exception.MyInvalidParameterException("id");
         }
         validate(city);
 
@@ -63,7 +60,7 @@ public class CityService implements ICityService {
         List<CityEntity> cities = cityRepository.findAll();
 
         if (cities.isEmpty())
-            throw new LplNoDataFoundException();
+            throw new com.lpl.errorhandling.exception.MyNoDataFoundException();
 
         List<City> cityList = new ArrayList<>();
         for (CityEntity cityEntity : cities) {
@@ -75,10 +72,10 @@ public class CityService implements ICityService {
     private void validate(City city) {
         // Id is validated by calling program since value is null for save and required for update
         if (city.getName() == null) {
-            throw new LplInvalidParameterException("name");
+            throw new com.lpl.errorhandling.exception.MyInvalidParameterException("name");
         }
         if (city.getPopulation() < 1) {
-            throw new LplInvalidParameterException("population", String.valueOf(city.getPopulation()),
+            throw new com.lpl.errorhandling.exception.MyInvalidParameterException("population", String.valueOf(city.getPopulation()),
                     "Population can not be less than 1");
         }
     }
