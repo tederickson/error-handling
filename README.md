@@ -1,25 +1,15 @@
-# LPL Common REST Classes
+# Common REST Classes
 
 Demonstrate Spring Boot REST application error handling.
 
 The basic idea is the @ControllerAdvice classes convert an Exception to a REST response.
 
-The driving force for this project is https://lplfinancial.atlassian.net/wiki/spaces/FAN/pages/58909262301/Spike+Refining+API+Responses 
 
 ## Helpful links
 * https://spring.io/guides/tutorials/rest
 * https://zetcode.com/springboot/controlleradvice/
 * https://www.baeldung.com/spring-valid-vs-validated
 
-
-## Build
-In order to build locally, setup `~/.gradle/gradle.properties` with the following properties to authenticate
-with the [internal Maven repository on Artifactory](https://lplfinancial.atlassian.net/wiki/spaces/DEV/pages/58605045930/Maven+onboarding)
-
-```
-mavenUser=<CORP username>
-mavenPassword=<CORP password>
-```
 
 ## Test
 com/lpl/rest/common/controller/CityControllerTest.java uses MockMvc to test the endpoints.
@@ -179,4 +169,5 @@ curl --location --request POST 'localhost:8080/cities' \
         "name": "New City",
         "population": 15923
     }
-]```
+]
+```
