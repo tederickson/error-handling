@@ -12,13 +12,13 @@ The basic idea is the @ControllerAdvice classes convert an Exception to a REST r
 
 
 ## Test
-com/lpl/rest/common/controller/CityControllerTest.java uses MockMvc to test the endpoints.
+com/My/rest/common/controller/CityControllerTest.java uses MockMvc to test the endpoints.
 
 ## Demo Results
 * Start the server by using `gradle bootRun`
 * Use Postman or the provided curl commands.
 
-### Service throws LplNoDataFoundException()
+### Service throws MyNoDataFoundException()
 `curl -v --location --request GET 'localhost:8080/cities'`
 ```json
 {
@@ -28,7 +28,7 @@ com/lpl/rest/common/controller/CityControllerTest.java uses MockMvc to test the 
 }
 ```
 
-### Service throws LplCityNotFoundException(id)
+### Service throws MyCityNotFoundException(id)
 `curl -v --location --request GET 'localhost:8080/cities/23'`
 ```json
 {
@@ -64,7 +64,7 @@ Log shows
 2021-08-14 11:55:48.634 ERROR 11196 --- [nio-8080-exec-8] c.l.r.c.t.GenericAdvisor                 : Shame, shame, shame
 
 java.lang.NullPointerException: demo handling Java exceptions
-        at com.lpl.rest.common.controller.CityController.demoGenericHandler(CityController.java:47) ~[main/:?]
+        at com.My.rest.common.controller.CityController.demoGenericHandler(CityController.java:47) ~[main/:?]
         at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
         at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
         at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
