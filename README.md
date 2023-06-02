@@ -15,7 +15,8 @@ The basic idea is the @ControllerAdvice classes convert an Exception to a REST r
 com/My/rest/common/controller/CityControllerTest.java uses MockMvc to test the endpoints.
 
 ## Demo Results
-* Start the server by using `gradle bootRun`
+* Compile the server by using `mvn install`
+* Start the server by using `mvn spring-boot:run`
 * Use Postman or the provided curl commands.
 
 ### Service throws MyNoDataFoundException()
@@ -61,7 +62,7 @@ The ControllerAdvisor was not called.  The message comes from Spring.
 ```
 Log shows
 ```bash
-2021-08-14 11:55:48.634 ERROR 11196 --- [nio-8080-exec-8] c.l.r.c.t.GenericAdvisor                 : Shame, shame, shame
+2021-08-14 11:55:48.634 ERROR 11196 --- [nio-8080-exec-8] c.l.r.c.t.GenericAdvisor                 : Create high priority Story to fix this
 
 java.lang.NullPointerException: demo handling Java exceptions
         at com.My.rest.common.controller.CityController.demoGenericHandler(CityController.java:47) ~[main/:?]
